@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script th:src="@{assets/bootstrap-select-1.13.9/dist/js/bootstrap-select.js}"></script>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css}"/>
+    <link th:rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}" type="text/css"/>
+
+</head>
+<body>
+</body>
+<div class="navigation-container" th:fragment="menu(activeTab)">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" th:href="@{/}">BookShelf</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <div class="nav-item-container">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/}">Поиск <span class="sr-only" th:text="${activeTab == 'Index' ? '(current)' : ''}"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shelf/}">Книжная полка <span class="sr-only" th:text="${activeTab == 'BookShelf' ? '(current)' : ''}"></span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">Рейтинг <span class="sr-only" th:text="${activeTab == 'Rank' ? '(current)' : ''}"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+</html>

@@ -1,0 +1,62 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+a {
+  text-decoration:none;
+}
+
+.navigation-container {
+	background-color: #e7e6e8;
+}
+
+.search-container {
+	margin: 0 auto;
+	max-width: 800px;
+}
+
+.form-inline {
+	margin-top: 10px;
+}
+
+#search-field {
+	width: 600px;
+}
+
+.container my-5 {
+	margin-top: 30px;
+}
+
+.nav-item-container ul li {
+    display: inline-block;
+    width: 150px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+#item-add-but {
+	float: left;
+}
+
+#item-desc {
+	float: right;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #e7e6e8;
+}
+
+.carousel {
+  margin:30px auto;
+  width: 73%;
+  height: 43%;
+}

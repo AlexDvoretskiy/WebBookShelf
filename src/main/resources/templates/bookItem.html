@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Bookshelf page</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script th:src="@{assets/bootstrap-select-1.13.9/dist/js/bootstrap-select.js}"></script>
+
+    <link th:rel="stylesheet" th:href="@{assets/bootstrap-select-1.13.9/dist/css/bootstrap-select.css}"/>
+    <link th:rel="stylesheet" th:href="@{../webjars/bootstrap/4.3.1/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" href="../css/main.css" th:href="@{/css/main.css}" type="text/css"/>
+
+</head>
+<body>
+<nav>
+    <div th:replace="~{menu :: menu(BookShelf)}">
+    </div>
+</nav>
+
+<div class="container" th:object="${bookItem}">
+    <h3 class="my-3" th:text="${bookItem.title}"></h3>
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-fluid" width="300" th:src="${bookItem.imageLink}" alt="">
+        </div>
+        <div class="col-md-8">
+            <h4 class="my-3">Авторы</h4>
+            <p th:utext="${#strings.replace(#strings.replace(bookItem.authors, '[',''), ']','')}"></p>
+            <h4 class="my-3">Описание</h4>
+            <p th:text="${bookItem.description}"></p>
+            <h4 class="my-3">Дополнительная информация</h4>
+            <ul>
+                <li th:text="${'Язык: ' + bookItem.language}"></li>
+                <li th:text="${'Категория: ' + bookItem.categories}"></li>
+            </ul>
+            <div class="row mt-5">
+                <a id="add-to-bookshelf-but" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить в список</a>
+                <a id="read-fragment-but" th:href="@{${bookItem.webReaderLink}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit" target="_blank">Читать фрагмент</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+<footer>
+    <div th:insert="~{footer :: foot}">
+    </div>
+</footer>
+</html>
