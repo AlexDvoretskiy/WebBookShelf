@@ -35,6 +35,9 @@
                 </ul>
             </div>
         </div>
+        <div id="login-button" class="nav-item pull-right">
+            <a class="nav-link" th:href="@{/login}">Войти <span class="sr-only" th:text="${activeTab == 'Rank' ? '(current)' : ''}"></span></a>
+        </div>
     </nav>
 </div>
 </html>

@@ -1,0 +1,46 @@
+CREATE SCHEMA `bookshelf_db` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
+USE bookshelf_db;
+
+DROP TABLE IF EXISTS roles;
+
+CREATE TABLE roles (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(50) DEFAULT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+INSERT INTO roles (name)
+VALUES
+('ROLE_USER'),('ROLE_ADMIN');
+
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+  id int NOT NULL AUTO_INCREMENT,
+  name varchar(50) NOT NULL,
+  password char(80) NOT NULL,
+  email varchar(50) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS users_roles;
+
+CREATE TABLE users_roles (
+  user_id int NOT NULL,
+  role_id int NOT NULL,
+
+  PRIMARY KEY (user_id, role_id),
+
+  KEY FK_ROLE_idx (role_id),
+
+  CONSTRAINT FK_USER FOREIGN KEY (user_id)
+  REFERENCES users (id)
+  ON DELETE NO ACTION ON UPDATE NO ACTION,
+
+  CONSTRAINT FK_ROLE FOREIGN KEY (role_id)
+  REFERENCES roles (id)
+  ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

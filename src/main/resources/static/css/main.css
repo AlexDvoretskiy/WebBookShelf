@@ -60,3 +60,11 @@ a {
   width: 73%;
   height: 43%;
 }
+
+#login-button a {
+	color: #909091;
+}
+
+#login-button a:hover {
+	color: #242e36;
+}
