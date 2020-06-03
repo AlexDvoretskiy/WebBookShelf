@@ -29,6 +29,14 @@ html,body{
 	background-color: rgba(0,0,0,0.5) !important;
 }
 
+#register-success-card{
+	height: 280px;
+	margin-top: auto;
+	margin-bottom: auto;
+	width: 400px;
+	background-color: rgba(0,0,0,0.5) !important;
+}
+
 .social_icon span{
 	font-size: 60px;
 	margin-left: 10px;
@@ -95,4 +103,13 @@ input:focus{
 
 .help-block{
 	color: white;
+}
+
+.welcome-label{
+	color: #ffe878de;
+}
+
+.welcome-text{
+	color: white;
+	text-align: center;
 }

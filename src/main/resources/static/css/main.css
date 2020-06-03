@@ -61,10 +61,16 @@ a {
   height: 43%;
 }
 
-#login-button a {
+.nav-but a {
 	color: #909091;
 }
 
-#login-button a:hover {
+.nav-but a:hover {
 	color: #242e36;
+}
+
+.logout-but{
+	outline: none !important;
+     border: 0 !important;
+    background: transparent !important;
 }

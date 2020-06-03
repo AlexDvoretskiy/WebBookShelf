@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8"/>
 
@@ -23,20 +23,33 @@
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <div class="nav-item-container">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a class="nav-link" th:href="@{/}">Поиск <span class="sr-only" th:text="${activeTab == 'Index' ? '(current)' : ''}"></span></a>
+                    <li class="nav-item" th:classappend="${activeTab == 'index' ? 'active' : ''}">
+                        <a class="nav-link" th:href="@{/}">Поиск <span class="sr-only"></span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/shelf/}">Книжная полка <span class="sr-only" th:text="${activeTab == 'BookShelf' ? '(current)' : ''}"></span></a>
+                    <li class="nav-item" th:classappend="${activeTab == 'bookShelf' ? 'active' : ''}">
+                        <a class="nav-link" th:href="@{/shelf/}">Книжная полка <span class="sr-only"></span></a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Рейтинг <span class="sr-only" th:text="${activeTab == 'Rank' ? '(current)' : ''}"></span></a>
+                    <li class="nav-item" th:classappend="${activeTab == 'rank' ? 'active' : ''}">
+                        <a class="nav-link" href="#">Рейтинг <span class="sr-only"></span></a>
                     </li>
                 </ul>
             </div>
         </div>
-        <div id="login-button" class="nav-item pull-right">
-            <a class="nav-link" th:href="@{/login}">Войти <span class="sr-only" th:text="${activeTab == 'Rank' ? '(current)' : ''}"></span></a>
+        <div class="nav-item pull-right nav-but" sec:authorize="isAuthenticated()">
+            <div class="nav-item dropdown pull-right">
+                <a class="nav-link dropdown-toggle nav-but" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Личный кабинет</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Профиль</a>
+                    <a class="dropdown-item" href="#">Настройки</a>
+                    <div class="dropdown-divider"></div>
+                    <form class="dropdown-item" th:action="@{/logout}" method="POST">
+                        <button class="logout-but" type="submit">Выйти</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="nav-item pull-right nav-but" sec:authorize="isAnonymous()">
+            <a class="nav-link" th:href="@{/login}">Войти <span class="sr-only"></span></a>
         </div>
     </nav>
 </div>

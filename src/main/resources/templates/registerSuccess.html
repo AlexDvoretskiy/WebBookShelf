@@ -14,7 +14,24 @@
 </head>
 <body>
     <div class="container">
-        <div>Поздравляем! Вы успешно зарегистрированы</div>
+        <div class="d-flex justify-content-center h-100">
+            <div id="register-success-card" class="card">
+                <div class="card-header mx-auto">
+                    <h1 class="welcome-label">W E L C O M E</h1>
+                </div>
+                <div class="card-body mx-auto">
+                    <h3 class="welcome-text">Вы успешно зарегистрированы!</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        <a th:href="@{/}">На главную</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a th:href="@{/login}">Войти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
