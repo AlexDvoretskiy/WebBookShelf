@@ -10,4 +10,5 @@ import webBookShelf.application.persistence.entities.data.User;
 public interface UserService extends UserDetailsService {
 	User findByUserName(String userName);
 	void save(SystemUser systemUser);
+	User getCurrentUser();
 }

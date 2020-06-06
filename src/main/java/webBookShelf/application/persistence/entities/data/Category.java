@@ -33,6 +33,11 @@ public class Category {
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = BooksTableDesc.ID_FIELD, insertable = false, updatable = false)
+	@JoinColumn(name = BooksTableDesc.ID_FIELD)
 	private Book book;
+
+	public Category(String name, Book book) {
+		this.name = name;
+		this.book = book;
+	}
 }

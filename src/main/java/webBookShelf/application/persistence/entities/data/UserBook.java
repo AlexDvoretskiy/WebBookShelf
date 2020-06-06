@@ -3,23 +3,14 @@ package webBookShelf.application.persistence.entities.data;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import webBookShelf.application.persistence.tables.BooksTableDesc;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import webBookShelf.application.persistence.tables.UserBooksTableDesc;
-import webBookShelf.application.persistence.tables.UsersTableDesc;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 
 @Data
@@ -33,23 +24,43 @@ public class UserBook {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = UsersTableDesc.ID_FIELD, insertable = false, updatable = false)
+	@Cascade(CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = UserBooksTableDesc.USER_ID)
 	private User user;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = BooksTableDesc.ID_FIELD, insertable = false, updatable = false)
+	@OneToOne
+	@Cascade(CascadeType.ALL)
+	@JoinColumn(name = UserBooksTableDesc.BOOK_ID_FIELD)
 	private Book book;
 
-	@Column(name = UserBooksTableDesc.BOOK_GROUP)
+	@Column(name = UserBooksTableDesc.BOOK_GROUP_FIELD)
 	private String group;
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = UserBooksTableDesc.ADD_DATE_FIELD)
-	private Timestamp add_date;
+	private Date addDate = new Date();
 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = UserBooksTableDesc.CLOSE_DATE_FIELD)
-	private Timestamp close_date;
+	private Date closeDate;
 
 	@Column(name = UserBooksTableDesc.ACTIVE_FIELD)
-	private boolean isActive;
+	private boolean isActive = true;
+
+
+	public UserBook(User user, Book book, String group) {
+		this.user = user;
+		this.book = book;
+		this.group = group;
+	}
+
+	public UserBook(User user, Book book) {
+		this.user = user;
+		this.book = book;
+	}
+
+	public UserBook(User user) {
+		this.user = user;
+	}
 }

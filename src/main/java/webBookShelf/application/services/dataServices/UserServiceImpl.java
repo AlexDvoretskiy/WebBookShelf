@@ -13,6 +13,7 @@ import webBookShelf.application.persistence.entities.data.Role;
 import webBookShelf.application.persistence.entities.data.User;
 import webBookShelf.application.persistence.repositories.RoleRepository;
 import webBookShelf.application.persistence.repositories.UserRepository;
+import webBookShelf.application.services.AuthService;
 import webBookShelf.application.services.dataServices.interfaces.UserService;
 
 import javax.transaction.Transactional;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
 	private UserRepository userRepository;
 	private RoleRepository roleRepository;
 	private BCryptPasswordEncoder passwordEncoder;
+	private AuthService authService;
 
 	@Override
 	@Transactional
@@ -46,6 +48,11 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(Collections.singletonList(roleRepository.findOneByName(DEFAULT_ROLE)));
 
 		userRepository.save(user);
+	}
+
+	@Transactional
+	public User getCurrentUser() {
+		return userRepository.findOneByName(authService.getCurrentUsername());
 	}
 
 	@Override
@@ -76,5 +83,10 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Autowired
+	public void setAuthService(AuthService authService) {
+		this.authService = authService;
 	}
 }

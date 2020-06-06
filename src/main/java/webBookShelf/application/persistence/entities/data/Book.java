@@ -1,5 +1,6 @@
 package webBookShelf.application.persistence.entities.data;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,14 +9,7 @@ import org.hibernate.annotations.CascadeType;
 
 import webBookShelf.application.persistence.tables.BooksTableDesc;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -49,11 +43,22 @@ public class Book {
 	@Column(name = BooksTableDesc.WEB_READER_LINK_FIELD)
 	private String webReaderLink;
 
-	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
 	@Cascade(CascadeType.ALL)
+	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER)
 	private List<Author> authors;
 
-	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
+	@OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
 	private List<Category> categories;
+
+	@Builder
+	public Book(String title, String description, List<Author> authors, List<Category> categories, String language, String imageLink, String webReaderLink) {
+		this.title = title;
+		this.description = description;
+		this.authors = authors;
+		this.categories = categories;
+		this.language = language;
+		this.imageLink = imageLink;
+		this.webReaderLink = webReaderLink;
+	}
 }
