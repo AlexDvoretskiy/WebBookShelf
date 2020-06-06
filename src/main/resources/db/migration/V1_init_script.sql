@@ -44,3 +44,78 @@ CREATE TABLE users_roles (
   REFERENCES roles (id)
   ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS authors;
+
+CREATE TABLE persistent_logins (
+    username varchar(64) not null,
+    series varchar(64) not null,
+    token varchar(64) not null,
+    last_used timestamp not null,
+    PRIMARY KEY (series)
+);
+
+
+DROP TABLE IF EXISTS books;
+
+CREATE TABLE books (
+	id int NOT NULL AUTO_INCREMENT,
+    title varchar(2000) not null,
+    description varchar(10000) not null,
+    maturity_rating varchar(30),
+    language varchar(20),
+    image_link varchar(150),
+    web_reader_link varchar(150),
+    PRIMARY KEY (id)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS authors;
+
+CREATE TABLE authors (
+	id int NOT NULL AUTO_INCREMENT,
+    book_id int NOT NULL,
+    name varchar(150) NOT NULL UNIQUE,
+    PRIMARY KEY (id),
+
+	CONSTRAINT FK_AUTHOR_BOOK FOREIGN KEY (book_id)
+    REFERENCES books (id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS categories;
+
+CREATE TABLE categories (
+	id int NOT NULL AUTO_INCREMENT,
+    book_id int NOT NULL,
+    name varchar(150) NOT NULL,
+    PRIMARY KEY (id),
+
+	CONSTRAINT FK_CATEGORY_BOOK FOREIGN KEY (book_id)
+    REFERENCES books (id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS user_books;
+
+CREATE TABLE user_books (
+	id int NOT NULL AUTO_INCREMENT,
+    user_id int NOT NULL,
+    book_id int NOT NULL,
+    book_group varchar(150),
+    add_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    close_date timestamp,
+    active boolean NOT NULL DEFAULT TRUE,
+    PRIMARY KEY (id),
+
+	CONSTRAINT FK_SHELF_BOOK FOREIGN KEY (book_id)
+    REFERENCES books (id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION,
+
+	CONSTRAINT FK_SHELF_USER FOREIGN KEY (user_id)
+    REFERENCES users (id)
+    ON DELETE NO ACTION ON UPDATE NO ACTION
+);
