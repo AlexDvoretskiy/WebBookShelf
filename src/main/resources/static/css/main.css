@@ -71,6 +71,14 @@ a {
 
 .logout-but{
 	outline: none !important;
-     border: 0 !important;
+    border: 0 !important;
     background: transparent !important;
+}
+
+#bookshelf-item-title {
+    font-size: 12px;
+}
+
+#bookshelf-item-card {
+    width: 13rem;
 }

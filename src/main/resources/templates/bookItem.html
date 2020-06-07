@@ -29,14 +29,14 @@
             <h4 class="my-3">Авторы</h4>
             <p th:utext="${#strings.replace(#strings.replace(bookItem.authors, '[',''), ']','')}"></p>
             <h4 class="my-3">Описание</h4>
-            <p th:text="${bookItem.description}"></p>
+            <div th:text="${bookItem.description}"></div>
             <h4 class="my-3">Дополнительная информация</h4>
             <ul>
                 <li th:text="${'Язык: ' + bookItem.language}"></li>
                 <li th:text="${'Категория: ' + bookItem.categories}"></li>
             </ul>
             <div class="row mt-5">
-                <a id="add-to-bookshelf-but" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить в список</a>
+                <a id="add-to-bookshelf-but" th:href="@{'/shelf/add/' + ${bookInfoDto.request_id}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить в список</a>
                 <a id="read-fragment-but" th:href="@{${bookItem.webReaderLink}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit" target="_blank">Читать фрагмент</a>
             </div>
         </div>

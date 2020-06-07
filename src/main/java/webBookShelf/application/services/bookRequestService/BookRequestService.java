@@ -35,8 +35,8 @@ public class BookRequestService {
 		return bookInfoMapper.map(bookResponse);
 	}
 
-	public BookInfoDto requestItem(String id) throws ResponseNotFoundException {
-		String urlRequest = String.format(REQUEST_ITEM_URL, id);
+	public BookInfoDto requestItem(String request_id) throws ResponseNotFoundException {
+		String urlRequest = String.format(REQUEST_ITEM_URL, request_id);
 
 		RestTemplate restTemplate = new RestTemplate();
 		Items items = restTemplate.getForObject(urlRequest, Items.class);

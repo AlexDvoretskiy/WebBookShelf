@@ -21,14 +21,19 @@ public class BookshelfService {
 	private UserService userService;
 	private AuthService authService;
 
-	public List<Book> getUserBooks() {
-		List<Book> books = new ArrayList<>();
-		List<UserBook> userBooks = bookshelfRepository.getAllByUserName(authService.getCurrentUsername());
+	@Transactional
+	public List<UserBook> getUserBooks() {
+		return bookshelfRepository.getAllByUserName(authService.getCurrentUsername());
+	}
 
-		for (UserBook userBook : userBooks) {
-			books.add(userBook.getBook());
-		}
-		return books;
+	@Transactional
+	public void deleteUserBook(Long id) {
+		bookshelfRepository.deleteById(id);
+	}
+
+	@Transactional
+	public void setNotActive(Long id) {
+ 		bookshelfRepository.setNotActive(id);
 	}
 
 	@Transactional

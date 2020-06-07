@@ -75,8 +75,8 @@
                             <p class="card-text mb-3" th:utext="${#strings.replace(#strings.replace(bookInfoDto.authors, '[',''), ']','')}"></p>
                             <hr>
                             <div class="row">
-                                <a th:href="@{'/shelf/add/' + ${bookInfoDto.id}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить</a>
-                                <a th:href="@{'/book/' + ${bookInfoDto.id}}" class="btn btn-light">подробнее</a>
+                                <a th:href="@{'/shelf/add/' + ${bookInfoDto.request_id}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить</a>
+                                <a th:href="@{'/book/' + ${bookInfoDto.request_id}}" class="btn btn-light">подробнее</a>
                             </div>
                         </div>
                     </div>

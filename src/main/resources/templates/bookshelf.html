@@ -18,31 +18,40 @@
         <div th:replace="~{menu :: menu(bookShelf)}">
         </div>
     </nav>
-    <div class="container my-4">
-        <section>
-            <div class="row">
-                <div id="row-item" class="col-md-3 mb-3" th:each="bookInfoDto: ${bookList}">
-                    <div class="card">
-                        <div class="view overlay">
-                            <img th:src="${bookInfoDto.imageLink}" class="card-img-top" alt="">
-                            <a>
-                                <div class="mask rgba-white-slight waves-effect waves-light"></div>
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title" th:text="${bookInfoDto.title}"></h5>
-                            <hr>
-                            <p class="card-text mb-3" th:utext="${#strings.replace(#strings.replace(bookInfoDto.authors, '[',''), ']','')}"></p>
-                            <hr>
-                            <div class="row">
-                                <a id="read-fragment-but" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить</a>
-                                <a th:href="@{'/book/' + ${bookInfoDto.id}}" class="btn btn-light">подробнее</a>
+    <div class="container-fluid my-4">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light active">Все</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light">Работа</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light">Учеба</a>
+                    <a href="#" class="list-group-item list-group-item-action list-group-item-light">Разное</a>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <section>
+                    <div class="row">
+                        <div id="row-item" class="col" th:each="bookInfoDto: ${bookList}">
+                            <div id="bookshelf-item-card" class="card">
+                                <div class="view overlay">
+                                    <img id="bookshelf-item-img" th:src="${bookInfoDto.imageLink}" class="card-img-top" alt="">
+                                    <a>
+                                        <div class="mask rgba-white-slight waves-effect waves-light"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <p id="bookshelf-item-title" class="card-title" th:text="${bookInfoDto.title}"></p>
+                                </div>
+                                <div class="btn-group" role="group">
+                                    <a th:href="@{'/shelf/notActive/' + ${bookInfoDto.id}}" type="button" class="btn btn-outline-info btn-xs">Прочитано</a>
+                                    <a th:href="@{'/shelf/delete/' + ${bookInfoDto.id}}" type="button" class="btn btn-outline-warning btn-xs">Удалить</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
+        </div>
     </div>
 </body>
 <footer>
