@@ -36,7 +36,7 @@
                 <li th:text="${'Категория: ' + bookItem.categories}"></li>
             </ul>
             <div class="row mt-5">
-                <a id="add-to-bookshelf-but" th:href="@{'/shelf/add/' + ${bookInfoDto.request_id}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить в список</a>
+                <a id="add-to-bookshelf-but" th:href="@{'/shelf/add/' + ${bookItem.request_id}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit">Добавить в список</a>
                 <a id="read-fragment-but" th:href="@{${bookItem.webReaderLink}}" class="btn btn btn-outline-info my-2 my-sm-0 mr-3" type="submit" target="_blank">Читать фрагмент</a>
             </div>
         </div>
